@@ -110,14 +110,25 @@ variable "aks_user_node_pool_vm_size" {
   default     = "Standard_D2s_v5"
 }
 
-variable "aks_user_node_pool_count" {
-  description = "Initial number of nodes in the AKS user node pool."
+variable "aks_user_node_pool_min_count" {
+  description = "Minimum number of nodes in the AKS user node pool."
   type        = number
   default     = 1
 
   validation {
-    condition     = var.aks_user_node_pool_count >= 1
-    error_message = "The AKS user node pool must contain at least one node."
+    condition     = var.aks_user_node_pool_min_count >= 1
+    error_message = "The minimum number of user nodes must be at least 1."
+  }
+}
+
+variable "aks_user_node_pool_max_count" {
+  description = "Maximum number of nodes in the AKS user node pool."
+  type        = number
+  default     = 3
+
+  validation {
+    condition     = var.aks_user_node_pool_max_count >= var.aks_user_node_pool_min_count
+    error_message = "The maximum user node count must be greater than or equal to the minimum node count."
   }
 }
 
