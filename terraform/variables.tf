@@ -84,7 +84,7 @@ variable "aks_kubernetes_version" {
 variable "aks_system_node_pool_vm_size" {
   description = "VM size used by the AKS system node pool."
   type        = string
-  default     = "Standard_D2s_v5"
+  default     = "Standard_D2s_v6"
 }
 
 variable "aks_system_node_pool_count" {
@@ -107,7 +107,7 @@ variable "aks_user_node_pool_name" {
 variable "aks_user_node_pool_vm_size" {
   description = "VM size used by the AKS user node pool."
   type        = string
-  default     = "Standard_D2s_v5"
+  default     = "Standard_D2s_v6"
 }
 
 variable "aks_user_node_pool_min_count" {
