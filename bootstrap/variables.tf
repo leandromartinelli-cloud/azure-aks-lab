@@ -13,7 +13,7 @@ variable "resource_group_name" {
 variable "storage_account_name" {
   description = "Globally unique name of the Azure Storage Account used for Terraform remote state."
   type        = string
-  default     = "sttfstateakslab001"
+  default     = "sttfstateakslm001"
 }
 
 variable "storage_container_name" {
