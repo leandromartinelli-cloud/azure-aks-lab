@@ -1,0 +1,58 @@
+# -----------------------------------------------------------------------------
+# Azure AKS Lab - Example Terraform Variables
+# -----------------------------------------------------------------------------
+# Copy this file to terraform.tfvars and customize the values for your
+# environment.
+#
+# Do not commit terraform.tfvars if it contains environment-specific or
+# sensitive information.
+# -----------------------------------------------------------------------------
+
+location     = "Brazil South"
+environment  = "lab"
+project_name = "akslab"
+
+# Resource Group
+resource_group_name = "rg-akslab-lab-brazilsouth-001"
+
+# Networking
+vnet_name         = "vnet-akslab-lab-brazilsouth-001"
+vnet_address_space = [
+  "10.10.0.0/16"
+]
+
+aks_subnet_name = "snet-aks-001"
+aks_subnet_address_prefixes = [
+  "10.10.0.0/22"
+]
+
+# Azure Container Registry
+acr_name = "acrakslablab001"
+acr_sku  = "Basic"
+
+# Azure Kubernetes Service
+aks_cluster_name       = "aks-akslab-lab-brazilsouth-001"
+aks_dns_prefix         = "akslab"
+aks_kubernetes_version = null
+
+# AKS System Node Pool
+aks_system_node_pool_vm_size = "Standard_D2s_v5"
+aks_system_node_pool_count   = 1
+
+# AKS User Node Pool
+aks_user_node_pool_name     = "user"
+aks_user_node_pool_vm_size  = "Standard_D2s_v5"
+aks_user_node_pool_min_count = 1
+aks_user_node_pool_max_count = 3
+
+# Microsoft Entra ID
+tenant_id                  = null
+aks_admin_group_object_ids = []
+
+# Common Tags
+tags = {
+  Environment = "Lab"
+  Project     = "Azure AKS Lab"
+  ManagedBy   = "Terraform"
+  Repository  = "azure-aks-lab"
+}
