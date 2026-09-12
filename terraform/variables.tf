@@ -46,6 +46,23 @@ variable "aks_subnet_address_prefixes" {
   default     = ["10.10.0.0/22"]
 }
 
+variable "acr_name" {
+  description = "Name of the Azure Container Registry."
+  type        = string
+  default     = "acrakslablab001"
+}
+
+variable "acr_sku" {
+  description = "SKU of the Azure Container Registry."
+  type        = string
+  default     = "Basic"
+
+  validation {
+    condition     = contains(["Basic", "Standard", "Premium"], var.acr_sku)
+    error_message = "The ACR SKU must be Basic, Standard, or Premium."
+  }
+}
+
 variable "tags" {
   description = "Common tags applied to Azure resources."
   type        = map(string)
