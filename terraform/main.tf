@@ -66,9 +66,12 @@ resource "azurerm_kubernetes_cluster_node_pool" "user" {
   name                  = var.aks_user_node_pool_name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
   vm_size               = var.aks_user_node_pool_vm_size
-  node_count            = var.aks_user_node_pool_count
   vnet_subnet_id        = azurerm_subnet.aks.id
   mode                  = "User"
+
+  auto_scaling_enabled = true
+  min_count            = var.aks_user_node_pool_min_count
+  max_count            = var.aks_user_node_pool_max_count
 
   tags = var.tags
 }
