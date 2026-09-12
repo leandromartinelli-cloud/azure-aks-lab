@@ -109,3 +109,15 @@ variable "tags" {
     Repository  = "azure-aks-lab"
   }
 }
+
+variable "tenant_id" {
+  description = "Microsoft Entra ID tenant ID used by the AKS cluster."
+  type        = string
+  default     = null
+}
+
+variable "aks_admin_group_object_ids" {
+  description = "Microsoft Entra ID group object IDs that will have administrative access to the AKS cluster."
+  type        = list(string)
+  default     = []
+}
