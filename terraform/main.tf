@@ -45,6 +45,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vnet_subnet_id = azurerm_subnet.aks.id
 
     only_critical_addons_enabled = true
+
+    upgrade_settings {
+      max_surge = "10%"
+    }
   }
 
   identity {
@@ -72,6 +76,10 @@ resource "azurerm_kubernetes_cluster_node_pool" "user" {
   auto_scaling_enabled = true
   min_count            = var.aks_user_node_pool_min_count
   max_count            = var.aks_user_node_pool_max_count
+
+  upgrade_settings {
+    max_surge = "10%"
+  }
 
   tags = var.tags
 }
