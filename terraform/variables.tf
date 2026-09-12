@@ -63,6 +63,41 @@ variable "acr_sku" {
   }
 }
 
+variable "aks_cluster_name" {
+  description = "Name of the Azure Kubernetes Service cluster."
+  type        = string
+  default     = "aks-akslab-lab-brazilsouth-001"
+}
+
+variable "aks_dns_prefix" {
+  description = "DNS prefix used by the AKS cluster."
+  type        = string
+  default     = "akslab"
+}
+
+variable "aks_kubernetes_version" {
+  description = "Kubernetes version used by the AKS cluster. Null uses the default version supported by Azure."
+  type        = string
+  default     = null
+}
+
+variable "aks_system_node_pool_vm_size" {
+  description = "VM size used by the AKS system node pool."
+  type        = string
+  default     = "Standard_D2s_v5"
+}
+
+variable "aks_system_node_pool_count" {
+  description = "Initial number of nodes in the AKS system node pool."
+  type        = number
+  default     = 1
+
+  validation {
+    condition     = var.aks_system_node_pool_count >= 1
+    error_message = "The AKS system node pool must contain at least one node."
+  }
+}
+
 variable "tags" {
   description = "Common tags applied to Azure resources."
   type        = map(string)
