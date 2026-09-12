@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-aks-lab
+  labels:
+    app: azure-aks-lab
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: azure-aks-lab
+  template:
+    metadata:
+      labels:
+        app: azure-aks-lab
+    spec:
+      containers:
+        - name: azure-aks-lab
+          image: acrakslablab001.azurecr.io/azure-aks-lab:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
