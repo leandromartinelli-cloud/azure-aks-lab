@@ -98,15 +98,26 @@ variable "aks_system_node_pool_count" {
   }
 }
 
-variable "tags" {
-  description = "Common tags applied to Azure resources."
-  type        = map(string)
+variable "aks_user_node_pool_name" {
+  description = "Name of the AKS user node pool."
+  type        = string
+  default     = "user"
+}
 
-  default = {
-    Environment = "Lab"
-    Project     = "Azure AKS Lab"
-    ManagedBy   = "Terraform"
-    Repository  = "azure-aks-lab"
+variable "aks_user_node_pool_vm_size" {
+  description = "VM size used by the AKS user node pool."
+  type        = string
+  default     = "Standard_D2s_v5"
+}
+
+variable "aks_user_node_pool_count" {
+  description = "Initial number of nodes in the AKS user node pool."
+  type        = number
+  default     = 1
+
+  validation {
+    condition     = var.aks_user_node_pool_count >= 1
+    error_message = "The AKS user node pool must contain at least one node."
   }
 }
 
@@ -120,4 +131,16 @@ variable "aks_admin_group_object_ids" {
   description = "Microsoft Entra ID group object IDs that will have administrative access to the AKS cluster."
   type        = list(string)
   default     = []
+}
+
+variable "tags" {
+  description = "Common tags applied to Azure resources."
+  type        = map(string)
+
+  default = {
+    Environment = "Lab"
+    Project     = "Azure AKS Lab"
+    ManagedBy   = "Terraform"
+    Repository  = "azure-aks-lab"
+  }
 }
